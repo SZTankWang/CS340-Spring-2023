@@ -6,6 +6,14 @@ import os
 import signal
 import re
 
+# code from external sources:
+# constructing http response, the response_header, response status line, received help from
+# https://stackoverflow.com/questions/10114224/how-to-properly-send-http-response-with-python-using-socket-library-only
+
+# the code for using select, received help from https://pymotw.com/3/select/#using-select
+
+
+
 def send_data(socket,data,connections):
     #see the request method
     data = data.decode("utf-8").split("\r\n")
@@ -35,6 +43,8 @@ def send_data(socket,data,connections):
             f = open(file,"r")
             text_body = f.read()
             response_header["Content-Length"] = len(text_body)
+
+
             response_header = "".join("%s:%s\n"% (key,value) for (key,value) in response_header.items())
             socket.send(str.encode("%s %s %s\n" % (proto,status,response_text),"utf-8"))
             socket.send(str.encode(response_header,"utf-8"))
