@@ -6,7 +6,11 @@ import json
 def parse_request(data):
     #get the first line of the request, with method, url
     data = data.decode("utf-8").split("\r\n")[0].split(" ")
-    url = data[1]
+    try:
+        url = data[1]
+    except IndexError:
+        print("no data available, exiting")
+        return
     #check if requesting product
     match = re.search(r"(/\w+)",url)
     status = 400
