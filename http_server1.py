@@ -1,4 +1,7 @@
 import os, socket, sys
+# code from external sources:
+# constructing http server, received help from
+# http://www.coolpython.net/python_senior/network/tcp_web_server.html
 
 def get_path(data):
     index = data.find("\r\n")
@@ -45,7 +48,6 @@ def http_server(SERVER_HOST, SERVER_PORT):
         path = get_path(request)
 
         exist_flag = check_requested_file(path)
-        print("exist flag",exist_flag)
         if exist_flag == 200:
             fin = open(path[1:])
             content = fin.read()
